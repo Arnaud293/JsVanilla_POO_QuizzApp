@@ -82,6 +82,15 @@ const display = {
   },
   progress : function(){
     this.elementShown('progress', `Question ${quizz.currentQuestionIndex + 1} sur ${quizz.questions.length}`)
+  },
+
+  endQuizz : function(){
+    let endQuizzHTML = 
+    `
+      <h1>Quizz terminé !</h1>
+      <h3>Score : ${quizz.score} / ${quizz.questions.length}</h3>
+    `
+    this.elementShown('quiz', endQuizzHTML);
   }
 }
 
@@ -89,6 +98,7 @@ const display = {
 
 quizzApp = () => {
   if (quizz.hasEnded()){
+    display.endQuizz();
 
   } else {
     display.questions();
