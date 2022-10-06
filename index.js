@@ -1,3 +1,14 @@
+class Question {
+  constructor(text, choices, answer){
+    this.text = text;
+    this.choices = choices;
+    this.answer = answer
+  }
+  isCorrectAnswer(choice){
+    return choice === this.answer;
+  }
+}
+
 const questions = [
   new Question(
     "Quelle méthode Javascript permet de filtrer les éléments d'un tableau",
