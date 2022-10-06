@@ -9,6 +9,8 @@ class Question {
   }
 }
 
+// Data in array
+
 const questions = [
   new Question(
     "Quelle méthode Javascript permet de filtrer les éléments d'un tableau",
@@ -32,6 +34,8 @@ const questions = [
   ),
 ];
 
+// 
+
 class Quizz {
   constructor(questions){
     this.score = 0;
@@ -39,7 +43,7 @@ class Quizz {
     this.currentQuestionIndex = 0;
   }
   getCurrentQuestion(){
-    return this.question[this.currentQuestionIndex];
+    return this.questions[this.currentQuestionIndex];
   }
   guess(answer){
     if(this.getCurrentQuestion().isCorrectAnswer(answer)){
@@ -48,6 +52,46 @@ class Quizz {
     this.currentQuestionIndex ++;
   }
   hasEnded(){
-    return this.currentQuestionIndex >= this.question.length;
+    return this.currentQuestionIndex >= this.questions.length;
   }
 }
+
+// Display app 
+
+const display = {
+  elementShown: function(id, text){
+    let element = document.getElementById(id);
+    element.innerHTML = text;
+  },
+  questions : function(){
+    this.elementShown('question', quizz.getCurrentQuestion().text)
+  },
+  choices : function(){
+    let choices = quizz.getCurrentQuestion().choices;
+
+    guessHandler = (id, guess) => {
+      document.getElementById(id).onclick = function() {
+        quizz.guess(guess);
+        quizzApp();
+      }
+    }
+    for(let i = 0; i < choices.length; i ++){
+      this.elementShown('choice' + i, choices[i])
+    }
+  }
+}
+
+// Game logic 
+
+quizzApp = () => {
+  if (quizz.hasEnded()){
+
+  } else {
+    display.questions();
+    display.choices();
+  }
+}
+
+// Create quizz 
+let quizz = new Quizz(questions);
+quizzApp();
