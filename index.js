@@ -76,8 +76,12 @@ const display = {
       }
     }
     for(let i = 0; i < choices.length; i ++){
-      this.elementShown('choice' + i, choices[i])
+      this.elementShown('choice' + i, choices[i]);
+      guessHandler('guess' + i, choices[i]);
     }
+  },
+  progress : function(){
+    this.elementShown('progress', `Question ${quizz.currentQuestionIndex + 1} sur ${quizz.questions.length}`)
   }
 }
 
@@ -89,6 +93,7 @@ quizzApp = () => {
   } else {
     display.questions();
     display.choices();
+    display.progress();
   }
 }
 
